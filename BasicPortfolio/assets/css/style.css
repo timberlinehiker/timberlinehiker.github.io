@@ -1,0 +1,25 @@
+/* style sheet for basic portfolio
+ */
+ font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;`
+ 
+ header {
+     background-color: #ffffff
+     border: 5px #cccccc
+     text-align: center;
+ }
+
+ h1 {
+    background-color: #ffffff
+    border: 5px #cccccc
+    padding: 20px 0;
+    margin: 0;
+    margin-bottom: 20px;
+    font-family: 'Georgia', Times, Times New Roman, serif;
+    
+  }
+
+  nav {
+      float: right
+  }
+
+  img {float: left;}
