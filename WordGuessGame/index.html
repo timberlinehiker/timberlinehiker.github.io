@@ -69,7 +69,9 @@
         var alreadyGuessed = [];
 
         var letters = [];
-        var wordInPlay = []
+        var wordInPlay = [];
+        var wrongGuesses = 0;
+        var wins = 0;
 
 
         //  SET UP INTITAL VALUES IN RESETGAME METHOD    
@@ -138,18 +140,22 @@
                 alreadyGuessed.push(guess.key);
                 $("#alreadyGuessed").append(guess.key, " ");
             }
-            console.log(userGuess, alreadyGuessed);
             if (wrongGuesses <= 0) {
                 alert("YOU LOSE");
                 resetGame();
             }
             console.log(userGuess, letters);
             if(userGuess.toString() === letters.toString()) {
+                wins = wins + 1;
+                $("#wins").html(wins);
                 alert("YOU WIN!!");
+
                 resetGame();
             }
+            
         }
-
+        console.log(userGuess, alreadyGuessed);
+            
         // CALL RESET GAME TO START GAME ON PAGE LOAD
         resetGame();
 
