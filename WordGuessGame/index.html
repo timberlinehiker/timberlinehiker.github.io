@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hang Man</title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
         crossorigin="anonymous">
@@ -22,27 +23,30 @@
 
 
     <!-- create side bar with images that relate to the styling of California nature theme! -->
-    <div id="imageBox">
-        <!-- image to be displayed -->
-    </div>
+    <div id="marquees" ;>
+        <div id="imageBox" , class="panel">
+            <!-- image to be displayed -->
+            <img src="assets/images/woodblock.jpeg" class="image"> 
+        </div>
 
-    <div id="gameBox">
-        <div>
-            <h2>Press Any Key to Start</h2>
-        </div>
-        <div>
-            <h2>Wins: </h2>
-            <div id="wins"></div>
-        </div>
-        <div id="currentGame">
-            <h3>Current Word: </h3>
-            <div id="userGuess"></div>
-            <h3>Letters Guessed: </h3>
-            <div id="alreadyGuessed">
-                
+        <div id="gameBox" , class="panel">
+            <div>
+                <h2>Press Any Key to Start</h2>
             </div>
-            <h3>Guesses Left: </h3>
-            <div id="wrongGuess">
+            <div>
+                <h2>Wins: </h2>
+                <div id="wins"></div>
+            </div>
+            <div id="currentGame">
+                <h3>Current Word: </h3>
+                <div id="userGuess"></div>
+                <h3>Letters Guessed: </h3>
+                <div id="alreadyGuessed">
+
+                </div>
+                <h3>Guesses Left: </h3>
+                <div id="wrongGuess">
+                </div>
             </div>
         </div>
     </div>
@@ -60,10 +64,13 @@
             "cascade",
             "ocean",
             "poppy",
-            "humpback whale",
-            "calla lily",
-            "redtailed hawk",
-            "monterrey cyprus",
+            "whale",
+            "lily",
+            "hawk",
+            "cyprus",
+            "coyote",
+            "beach",
+
         ]
         var userGuess = [];
         var alreadyGuessed = [];
@@ -82,7 +89,7 @@
             wrongGuesses = 10;
             $("#userGuess").empty();
             $("#alreadyGuessed").empty();
-          
+
             // <!-- pick one of the words at random 
             wordInPlay = wordList[Math.floor(Math.random() * wordList.length)];
             console.log(wordInPlay);
@@ -113,26 +120,38 @@
             // Determines which key was pressed.
 
             console.log(guess.key);
+            if (wrongGuesses <= 0) {
+                alert("YOU LOSE");
+                resetGame();
+            }
+            console.log(userGuess, letters);
+            if (userGuess.toString() === letters.toString()) {
+                wins = wins + 1;
+                $("#wins").html(wins);
+                alert("YOU WIN!!");
+
+                resetGame();
+            }
 
             //if key pressed is already in the user guess array, alert that they alreay guessed that letter
-            if (alreadyGuessed.includes(guess.key) ||userGuess.includes(guess.key)) {
+            if (alreadyGuessed.includes(guess.key) || userGuess.includes(guess.key)) {
                 alert("Already guessed that one");
                 return false;
             }
             else if (letters.includes(guess.key)) {
                 $("#userGuess").empty();
-                    for (var i = 0; i < letters.length; i++) {
-                        if (letters[i] === guess.key) {
-                            userGuess[i] = guess.key;
-                            // $("#userGuess").html(userGuess);
+                for (var i = 0; i < letters.length; i++) {
+                    if (letters[i] === guess.key) {
+                        userGuess[i] = guess.key;
+                        // $("#userGuess").html(userGuess);
 
 
-                        }
-                        $("#userGuess").append(userGuess[i] + " ");
                     }
-                    
+                    $("#userGuess").append(userGuess[i] + " ");
                 }
-            
+
+            }
+
             else {
                 wrongGuesses = wrongGuesses - 1;
                 console.log(wrongGuesses);
@@ -140,22 +159,11 @@
                 alreadyGuessed.push(guess.key);
                 $("#alreadyGuessed").append(guess.key, " ");
             }
-            if (wrongGuesses <= 0) {
-                alert("YOU LOSE");
-                resetGame();
-            }
-            console.log(userGuess, letters);
-            if(userGuess.toString() === letters.toString()) {
-                wins = wins + 1;
-                $("#wins").html(wins);
-                alert("YOU WIN!!");
-
-                resetGame();
-            }
             
+
         }
         console.log(userGuess, alreadyGuessed);
-            
+
         // CALL RESET GAME TO START GAME ON PAGE LOAD
         resetGame();
 
